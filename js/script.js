@@ -1,84 +1,136 @@
 // =========================================================>
 // MENU MOBILE
-    document.querySelector('[name="menu"]').addEventListener('click',()=>{
-        var menuMobile = document.querySelector('.menu-mobile ul');
+(() => {
+    const toggle = document.querySelector('.menu-toggle');
+    const list = document.querySelector('.menu-mobile ul');
+    if (!toggle || !list) return;
 
-        if(menuMobile.classList.contains('active')){
-            menuMobile.classList.remove('active');
-        }else{
-            menuMobile.classList.add('active');
-        }
-    })
+    toggle.addEventListener('click', () => {
+        const isOpen = list.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    list.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            list.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
 
 // =========================================================>
 // SLIDER HEADER
-    var lastIndex = 0;
+(() => {
+    const slides = document.querySelectorAll('.slider .slider-track img');
+    const bullets = document.querySelectorAll('.bullets-single');
+    if (!slides.length) return;
 
-    var imagem = document.querySelectorAll('.slider .container img');
-    var bullets = document.querySelectorAll('.bullets-single');
+    let current = 0;
+    let timer;
 
-    imagem.forEach((item,index)=>{
-        bullets[index].addEventListener('click',()=>{
-            let lastImage = imagem[lastIndex]
-            let actualImage = imagem[index]
+    function goTo(index) {
+        slides[current].classList.remove('active');
+        bullets[current].classList.remove('active-bullets');
+        bullets[current].setAttribute('aria-selected', 'false');
 
-            bullets[lastIndex].classList.remove('active-bullets');
-            bullets[index].classList.add('active-bullets')
+        current = index;
 
-            lastImage.style.opacity = 0;
-            actualImage.style.opacity = 1;
-            lastIndex = index;
-        })
-        
+        slides[current].classList.add('active');
+        bullets[current].classList.add('active-bullets');
+        bullets[current].setAttribute('aria-selected', 'true');
+    }
+
+    bullets.forEach((bullet, index) => {
+        bullet.addEventListener('click', () => {
+            goTo(index);
+            restart();
+        });
     });
 
+    function restart() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo((current + 1) % slides.length), 6000);
+    }
+    restart();
+})();
+
 // =========================================================>
-// SESSÃO SABOR FUNÇÃO COR E IMAGE
+// SESSÃO SABOR — mixer de sabores
+(() => {
+    const root = document.documentElement;
+    const jarra = document.getElementById('jarra');
+    const nome = document.getElementById('sabor-nome');
+    const buttons = document.querySelectorAll('.sabor-btn');
+    if (!jarra || !buttons.length) return;
 
-    let svg = document.querySelectorAll("[fill]")
-    let itens = document.querySelectorAll('.box-suco img');
-    let jarra = document.querySelector('.box-jarra img');
-    let variavelCor = document.querySelector(':root');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const { flavor, color, jarra: jarraSrc } = btn.dataset;
 
-    function colorBG(cor){
-        variavelCor.style.setProperty("--cor1", cor);
+            root.style.setProperty('--cor1', color);
+            jarra.src = jarraSrc;
+            jarra.alt = `Jarra com suco de ${flavor}`;
+            nome.textContent = flavor;
 
-        svgCor = cor
-        for(let i = 0; i < svg.length; i++){ 
-            svg[i].attributes.fill.value = svgCor;
+            buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+
+            btn.classList.remove('pop');
+            void btn.offsetWidth; // restart animation
+            btn.classList.add('pop');
+        });
+    });
+})();
+
+// =========================================================>
+// FORM + TOAST
+(() => {
+    const form = document.querySelector('#contato form');
+    const toast = document.querySelector('.toast');
+    const closeBtn = document.querySelector('.toast .close');
+    if (!form || !toast) return;
+
+    let hideTimer;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
         }
-    }
 
-    function saborJarra(imgJara){
-        jarra.src = imgJara
-    }
+        toast.classList.add('active');
+        form.reset();
 
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => toast.classList.remove('active'), 5000);
+    });
 
-    for(let i = 0; i < itens.length; i++){
-        itens[i].addEventListener('click',function(e){
-            console.log(e.target.id);
-            document.querySelector('.box-jarra h3').innerHTML = e.target.id.toUpperCase()
-            if(e.target.id == e.target.id){
-                saborJarra(imgJara)
-                colorBG(cor)
-            }   
-             
-        })
-    }
+    closeBtn?.addEventListener('click', () => {
+        toast.classList.remove('active');
+        clearTimeout(hideTimer);
+    });
+})();
 
 // =========================================================>
-// FORM POPAP
+// SCROLL REVEAL
+(() => {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
 
+    if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('in-view'));
+        return;
+    }
 
-var popap = document.querySelector('.popap')
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
 
-var btn = document.querySelector('input[type=submit]')
-    btn.addEventListener('click',(e)=>{
-    e.preventDefault()
-    popap.classList.add('active')
-
-    document.querySelector('.close').addEventListener('click',()=>{
-        popap.classList.remove('active')
-    })
-})
-
+    items.forEach(el => observer.observe(el));
+})();
