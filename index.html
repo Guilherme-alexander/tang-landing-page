@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>page tang</title>
+    <meta name="description" content="Tang — misture seu sabor favorito e descubra uma história que foi parar até na Lua.">
+    <meta name="theme-color" content="#FF8A1E">
+    <title>Tang · Misture seu sabor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
     <header id="home">
-        <div class="container">
-            <div class="logo">
-                <img src="img/logo_tang.png" alt="logo marca">
-            </div><!-- logo -->
+        <div class="container header-inner">
+            <a class="logo" href="#home">
+                <img src="img/logo_tang.png" alt="Tang">
+            </a>
 
-            <nav class="menu-desktop">
+            <nav class="menu-desktop" aria-label="Navegação principal">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#sabor">Sabor</a></li>
@@ -24,121 +31,179 @@
                 </ul>
             </nav>
 
-            <nav class="menu-mobile">
-                <ion-icon name="menu"></ion-icon>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#sabor">Sabor</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-        </div><!-- container -->
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mobile-list">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <nav class="menu-mobile" aria-label="Navegação móvel">
+            <ul id="menu-mobile-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sabor">Sabor</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
     </header>
 
+    <main id="conteudo">
 
-    <section class="slider">
-        
-        <div class="container">
-            <img style="opacity:1;" src="img/img_path_1579787329.png" alt="imagem Slider">
-            <img src="img/14251301_froneri_site_banners_tang_1920x720px.jpg" alt="imagem Slider">
-            <img src="img/5fe0ae98b5800a788ffbf658_ver nova.jpg" alt="imagem Slider">
-        </div>
-        <div class="bullets">
-            <div class="bullets-single active-bullets"></div>
-            <div class="bullets-single"></div>
-            <div class="bullets-single"></div>
-        </div>
+        <section class="slider" aria-label="Destaques">
+            <div class="slider-track container">
+                <img class="active" src="img/img_path_1579787329.png" alt="Destaque Tang 1">
+                <img src="img/14251301_froneri_site_banners_tang_1920x720px.jpg" alt="Destaque Tang 2">
+                <img src="img/5fe0ae98b5800a788ffbf658_ver nova.jpg" alt="Destaque Tang 3">
+            </div>
+            <div class="bullets" role="tablist" aria-label="Selecionar destaque">
+                <button class="bullets-single active-bullets" role="tab" aria-selected="true" aria-label="Destaque 1"></button>
+                <button class="bullets-single" role="tab" aria-selected="false" aria-label="Destaque 2"></button>
+                <button class="bullets-single" role="tab" aria-selected="false" aria-label="Destaque 3"></button>
+            </div>
+        </section>
 
-    </section>
+        <section id="sabor" class="sabor">
+            <div class="blob" aria-hidden="true"></div>
+            <div class="container sabor-grid">
 
+                <div class="sabor-intro reveal">
+                    <span class="eyebrow">Escolha seu sabor</span>
+                    <h1>Misture. <br>Sinta. <br>Repita.</h1>
+                    <p>Toque em um saquinho e veja o copo ganhar cor e sabor na hora. Simples assim — igual no liquidificador.</p>
+                </div>
 
-    <section id="sabor" class="sabor">
-        <div class="container">
+                <div class="jarra-stage reveal">
+                    <div class="jarra-glow" aria-hidden="true"></div>
+                    <svg class="jarra-wave" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M0,20 C 50,40 100,0 150,20 C 200,40 250,0 300,20 L300,40 L0,40 Z"/>
+                    </svg>
+                    <img id="jarra" src="img/jarra-laranja.png" alt="Jarra com suco de laranja">
+                    <h3 id="sabor-nome">laranja</h3>
+                </div>
 
-            <div class="box-single">
-                <span><img src="img/logo_tang.png" alt="logo marca">
-                <p>Seu Sabor Favorito!</p>
-            </span>
+                <div class="box-suco reveal" role="group" aria-label="Sabores disponíveis">
+                    <button class="sabor-btn" data-flavor="laranja" data-color="#f89f1b" data-jarra="img/jarra-laranja.png" aria-pressed="true">
+                        <img src="img/saquinho-laranja.png" alt="Laranja">
+                        <span>Laranja</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="uva" data-color="#7f3383" data-jarra="img/jarra-uva.png" aria-pressed="false">
+                        <img src="img/saquinho-uva.png" alt="Uva">
+                        <span>Uva</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="abacaxi" data-color="#ddbb45" data-jarra="img/jarra-abacaxi.png" aria-pressed="false">
+                        <img src="img/saquinho-abacaxi.png" alt="Abacaxi">
+                        <span>Abacaxi</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="goiaba" data-color="#fe756f" data-jarra="img/jarra-goiaba.png" aria-pressed="false">
+                        <img src="img/saquinho-goiaba.png" alt="Goiaba">
+                        <span>Goiaba</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="maracuja" data-color="#ffc600" data-jarra="img/jarra-maracuja.png" aria-pressed="false">
+                        <img src="img/saquinho-maracuja.png" alt="Maracujá">
+                        <span>Maracujá</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="morango" data-color="#f23834" data-jarra="img/jarra-morango.png" aria-pressed="false">
+                        <img src="img/saquinho-morango.png" alt="Morango">
+                        <span>Morango</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="limao" data-color="#149727" data-jarra="img/jarra-limao.png" aria-pressed="false">
+                        <img src="img/saquinho-limao.png" alt="Limão">
+                        <span>Limão</span>
+                    </button>
+                    <button class="sabor-btn" data-flavor="tangerina" data-color="#f97009" data-jarra="img/jarra-tangerina.png" aria-pressed="false">
+                        <img src="img/saquinho-tangerina.png" alt="Tangerina">
+                        <span>Tangerina</span>
+                    </button>
+                </div>
 
-                <div class="box-jarra"> 
-                    <img id="jarra" src="img/jarra-laranja.png" alt="jarra suco">
-                    <h3>laranja</h3>
-                </div><!-- sabor -->
+            </div>
+        </section>
 
-                <div class="box-suco">
-                    <img id="uva" onclick="colorBG('#7f3383');saborJarra('img/jarra-uva.png')" src="img/saquinho-uva.png" alt="saquinho suco">
+        <section id="sobre" class="sobre">
+            <div class="container">
+                <span class="eyebrow eyebrow-dark reveal">Desde 1957</span>
+                <h2 class="reveal">Uma história que foi parar na Lua</h2>
 
-                    <img id="abacaxi" onclick="colorBG('#ddbb45');saborJarra('img/jarra-abacaxi.png')" src="img/saquinho-abacaxi.png" alt="saquinho suco">
+                <ol class="timeline">
+                    <li class="reveal">
+                        <span class="timeline-year">1957</span>
+                        <p>O químico William Mitchell registra a fórmula do refresco em pó.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="timeline-year">1959</span>
+                        <p>A General Foods lança o produto no mercado norte-americano.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="timeline-year">Anos 60</span>
+                        <p>A NASA adota o refresco no Projeto Gemini — e as vendas decolam de verdade.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="timeline-year">1969</span>
+                        <p>Vai junto na Apollo 11 e chega até a Lua ao lado dos astronautas.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="timeline-year">1985–1989</span>
+                        <p>Philip Morris compra a General Foods e depois a Kraft, unindo as duas em Kraft General Foods.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="timeline-year">2012</span>
+                        <p>Nasce a Mondelēz International, hoje responsável pela marca.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
 
-                    <img id="goiaba" onclick="colorBG('#fe756f');saborJarra('img/jarra-goiaba.png')" src="img/saquinho-goiaba.png" alt="saquinho suco">
+        <section class="video">
+            <div class="container video-inner reveal">
+                <div class="video-frame">
+                    <iframe id="videoYT" frameborder="0" allowfullscreen="1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="Vídeo Tang" src="https://www.youtube.com/embed/GTSqxzJi_wQ?wmode=transparent&amp;showinfo=0&amp;rel=0&amp;showsearch=0&amp;controls=1&amp;autohide=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.tang.com.br&amp;widgetid=1"></iframe>
+                </div>
+            </div>
+        </section>
 
-                    <img id="maracuja" onclick="colorBG('#ffc600');saborJarra('img/jarra-maracuja.png')" src="img/saquinho-maracuja.png" alt="saquinho suco">
+        <section id="contato" class="contato">
+            <div class="container reveal">
+                <span class="eyebrow eyebrow-dark">Fale com a gente</span>
+                <h2>Contato</h2>
 
-                    <img id="morango" onclick="colorBG('#f23834');saborJarra('img/jarra-morango.png')" src="img/saquinho-morango.png" alt="saquinho suco">
+                <form novalidate>
+                    <div class="linha">
+                        <div class="campo">
+                            <input required id="nome" name="nome" type="text" placeholder=" ">
+                            <label for="nome">Nome</label>
+                        </div>
+                        <div class="campo">
+                            <input required id="sobrenome" name="sobrenome" type="text" placeholder=" ">
+                            <label for="sobrenome">Sobrenome</label>
+                        </div>
+                    </div>
+                    <div class="campo campo-full">
+                        <input required id="email" name="email" type="email" placeholder=" ">
+                        <label for="email">E-mail</label>
+                    </div>
+                    <div class="campo campo-full">
+                        <textarea required id="mensagem" name="mensagem" rows="5" placeholder=" "></textarea>
+                        <label for="mensagem">Mensagem</label>
+                    </div>
+                    <button class="btn-enviar" type="submit">Enviar mensagem</button>
+                </form>
+            </div>
 
-                    <img id="limao" onclick="colorBG('#149727');saborJarra('img/jarra-limao.png')" src="img/saquinho-limao.png" alt="saquinho suco">
+            <div class="toast" role="status" aria-live="polite">
+                <button class="close" type="button" aria-label="Fechar aviso">✕</button>
+                <strong>Mensagem enviada!</strong>
+                <span>Obrigado por escrever pra gente.</span>
+            </div>
+        </section>
 
-                    <img id="tangerina" onclick="colorBG('#f97009');saborJarra('img/jarra-tangerina.png')" src="img/saquinho-tangerina.png" alt="saquinho suco">
-
-                    <img id="laranja" onclick="colorBG('#f89f1b');saborJarra('img/jarra-laranja.png')" src="img/saquinho-laranja.png" alt="saquinho suco">
-                </div><!-- box-suco -->
-
-            </div><!-- box-single -->
-
-        </div><!-- container -->
-    </section>
-
-    <section id="sobre" class="sobre">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f89f1b" fill-opacity="1" d="M0,128L48,117.3C96,107,192,85,288,74.7C384,64,480,64,576,69.3C672,75,768,85,864,101.3C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
-        <div class="container">
-
-            <h2>Sobre</h2>
-            <p>
-                Desenvolvido pelo químico William Mitchell, foi registrado em 1957 e lançado no mercado norte-americano em 1959 pela General Foods. O refresco só começou a ser rentável para a empresa, quando a NASA utilizou o produto no Projeto Gemini, em meados da década de 1960, e disparou em vendas quando foi usado no Projeto Apollo, sendo levado a Lua, em 1969.
-
-                Em 2012, a Kraft Foods criou a Mondelēz International, uma divisão para o negócio de guloseimas, que incluem o refresco, porém, foi em 1988 que a marca passou a ter ligação com a Kraft, já que em 1985, a General Foods foi comprada pela Philip Morris Companies e em 1988 a Philip comprou a Kraft. Em 1989 as divisões se uniram, formando a Kraft General Foods
-            </p>
-        </div><!-- container -->
-    </section><!-- sobre -->
-
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f89f1b" fill-opacity="1" d="M0,128L48,122.7C96,117,192,107,288,117.3C384,128,480,160,576,181.3C672,203,768,213,864,224C960,235,1056,245,1152,234.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-
-
-    <div class="container video">
-
-        <iframe id="videoYT" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" src="https://www.youtube.com/embed/GTSqxzJi_wQ?wmode=transparent&amp;showinfo=0&amp;rel=0&amp;showsearch=0&amp;controls=1&amp;autohide=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.tang.com.br&amp;widgetid=1"></iframe>
-
-    </div><!-- container -->
-    
-    <section id="contato" class="contato">
-
-        <div class="container">
-            <h2>Contato</h2>
-
-            <div class="popap">
-                <span class="close">X</span>
-                <h3>Mensagem Enviada Com Sucesso!</h3>
-            </div><!-- popap -->
-
-            <form>
-                <div class="nome">
-                    <input required="name" id="nome" type="text" placeholder="Nome">
-                    <input required="name" id="sobrenome" type="text" placeholder="Sobrenome">
-                </div><!-- nome -->
-                <input required="email" type="email" placeholder="E-mail">
-                <textarea required cols="30" rows="10" placeholder="Mensagem"></textarea>
-                <input type="submit" value="Enviar">
-            </form>
-
-        </div><!-- container -->
-    </section><!-- contact -->
+    </main>
 
     <footer>
-        <p>&copy; Todos os Direitos Reservados a Guilherme Alexander - 2021</p>
+        <div class="container footer-inner">
+            <img src="img/logo_tang.png" alt="Tang">
+            <p>&copy; 2026 · Todos os direitos reservados a Guilherme Alexander</p>
+        </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>
